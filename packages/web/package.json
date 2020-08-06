@@ -1,0 +1,11 @@
+{
+  "name": "web",
+  "private": true,
+  "dependencies": {
+    "@happapi/jsonrpc-api": "^0.0.0"
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "start": "set CONTROLLER_DIR=./dist/controllers PORT=6000 start-happapi-jsonrpc-server"
+  }
+}
