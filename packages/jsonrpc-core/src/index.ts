@@ -1,3 +1,3 @@
-export * from './JsonrpcError2';
-export * from './JsonrpcResult2';
-export * from './JsonrpcHandler2';
+export * from './JsonrpcError';
+export * from './JsonrpcResult';
+export * from './JsonrpcHandler';

@@ -1,5 +1,5 @@
-import { JsonrpcResult } from './JsonrpcResult2';
-import { JsonrpcError, InvalidRequest, MethodNotFound, InternalError, ParseError } from './JsonrpcError2';
+import { JsonrpcResult } from './JsonrpcResult';
+import { JsonrpcError, InvalidRequest, MethodNotFound, InternalError, ParseError } from './JsonrpcError';
 
 export type ISuccessResponseObject = { jsonrpc: '2.0', id: string | number | null, result?: any };
 export type IErrorResponseObject = { jsonrpc: '2.0', id: string | number | null, error?: any };
