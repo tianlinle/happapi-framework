@@ -17,7 +17,8 @@ export class ApiRegister {
       realpath: true
     });
     for (const file of found) {
-      const controllerClass: typeof ControllerBase = await import(file);
+      const imported = await import(file);
+      const controllerClass: typeof ControllerBase = imported[path.basename(file, '.js')];
       const method = file.replace(cwd, '').substr(1).replace(/\.js$/, '').replace(/[\\/]/, '.');
       this.controllerMap[method] = controllerClass;
       this.schemaMap[method] = controllerClass.paramsSchema();

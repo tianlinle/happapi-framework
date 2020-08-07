@@ -2,10 +2,11 @@
   "name": "web",
   "private": true,
   "dependencies": {
-    "@happapi/jsonrpc-api": "^0.0.0"
+    "@happapi/jsonrpc-api": "^0.0.0",
+    "dotenv": "^8.2.0"
   },
   "scripts": {
     "tsc": "tsc",
-    "start": "set CONTROLLER_DIR=./dist/controllers PORT=6000 start-happapi-jsonrpc-server"
+    "start": "node -r dotenv/config  ./node_modules/@happapi/jsonrpc-api/dist/bin/startServer.js"
   }
 }
