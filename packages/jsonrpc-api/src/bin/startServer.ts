@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import * as Koa from 'koa';
 import * as getRawBody from 'raw-body';
 import * as Router from 'koa-router';
