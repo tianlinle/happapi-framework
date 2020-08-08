@@ -12,7 +12,8 @@
     "typescript": "^3.9.7"
   },
   "scripts": {
-    "postinstall": "lerna bootstrap"
+    "postinstall": "lerna bootstrap",
+    "publish": "lerna publish --registry https://registry.npmjs.org"
   },
   "name": "happapi-framework",
   "dependencies": {}
