@@ -19,5 +19,8 @@
   "scripts": {
     "tsc": "tsc",
     "start-example": "node ./dist/example/test.js"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

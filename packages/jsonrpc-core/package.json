@@ -19,5 +19,8 @@
   "homepage": "https://github.com/tianlinle/jsonrpc#readme",
   "files": [
     "src"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
