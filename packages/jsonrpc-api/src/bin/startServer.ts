@@ -5,7 +5,7 @@ import { ApiRegister } from '../ApiRegister';
 import * as contentType from 'content-type';
 
 const unparsed = Symbol.for('unparsedBody');
-const { CONTROLLER_DIR, ROUTER_PATH = '/', PORT = 6000, BODY_LIMIT = '10kb' } = process.env;
+const { CONTROLLER_DIR, ROUTER_PATH = '/', PORT = 3003, BODY_LIMIT = '10kb' } = process.env;
 const app = new Koa();
 const router = new Router();
 const apiRegister = new ApiRegister();
