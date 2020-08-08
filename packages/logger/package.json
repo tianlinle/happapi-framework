@@ -11,12 +11,12 @@
   "homepage": "https://github.com/tianlinle/happapi-framework#readme",
   "license": "Apache-2.0",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tianlinle/happapi-framework.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
     "tsc": "tsc",
     "start-example": "node ./dist/example/test.js"
   }

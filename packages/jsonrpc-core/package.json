@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "A simple implementation of jsonrpc2",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "tsc": "tsc",
-    "prepublishOnly": "npm run compile"
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",
@@ -14,11 +14,8 @@
   "keywords": [
     "jsonrpc"
   ],
-  "author": "tianlinle",
+  "author": "tianlin <501824056@qq.com>",
   "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/tianlinle/jsonrpc/issues"
-  },
   "homepage": "https://github.com/tianlinle/jsonrpc#readme",
   "files": [
     "src"
