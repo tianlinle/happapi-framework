@@ -12,34 +12,34 @@ export class JsonrpcError extends Error {
   toJSON() {
     return Object.assign({}, this, { message: this.message });
   }
+
+  static ParseError = class ParseError extends JsonrpcError {
+    constructor(data?) {
+      super(-32700, 'Parse error', data);
+    }
+  }
+
+  static InvalidRequest = class InvalidRequest extends JsonrpcError {
+    constructor(data?) {
+      super(-32600, 'Invalid Request', data);
+    }
+  }
+
+  static MethodNotFound = class MethodNotFound extends JsonrpcError {
+    constructor(data?) {
+      super(-32601, 'Method not found', data);
+    }
+  }
+
+  static InvalidParams = class InvalidParams extends JsonrpcError {
+    constructor(data?) {
+      super(-32602, 'Invalid params', data);
+    }
+  }
+
+  static InternalError = class InternalError extends JsonrpcError {
+    constructor(data?) {
+      super(-32603, 'Internal error', data);
+    }
+  }
 }
-
-export class ParseError extends JsonrpcError {
-  constructor(data?) {
-    super(-32700, 'Parse error', data);
-  }
-};
-
-export class InvalidRequest extends JsonrpcError {
-  constructor(data?) {
-    super(-32600, 'Invalid Request', data);
-  }
-};
-
-export class MethodNotFound extends JsonrpcError {
-  constructor(data?) {
-    super(-32601, 'Method not found', data);
-  }
-};
-
-export class InvalidParams extends JsonrpcError {
-  constructor(data?) {
-    super(-32602, 'Invalid params', data);
-  }
-};
-
-export class InternalError extends JsonrpcError {
-  constructor(data?) {
-    super(-32603, 'Internal error', data);
-  }
-};

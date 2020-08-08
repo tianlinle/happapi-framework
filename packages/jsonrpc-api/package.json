@@ -31,21 +31,24 @@
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "start-example": "node -r dotenv/config dist/bin/startServer.js"
   },
   "bugs": {
     "url": "https://github.com/tianlinle/happapi-framework/issues"
   },
   "dependencies": {
     "@happapi/jsonrpc-core": "^0.0.0",
-    "@types/koa-router": "^7.4.1",
     "ajv": "^6.12.3",
+    "content-type": "^1.0.4",
     "glob": "^7.1.6",
     "koa": "^2.13.0",
-    "koa-body": "^4.2.0",
-    "koa-router": "^9.1.0"
+    "koa-router": "^9.1.0",
+    "raw-body": "^2.4.1"
   },
   "devDependencies": {
-    "@types/koa": "^2.11.3"
+    "@types/koa": "^2.11.3",
+    "@types/koa-router": "^7.4.1",
+    "dotenv": "^8.2.0"
   }
 }

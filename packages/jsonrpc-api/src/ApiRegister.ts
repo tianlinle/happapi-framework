@@ -9,17 +9,17 @@ export class ApiRegister {
   schemaMap: { [method: string]: any } = {}
 
   async registerDir(dir: string) {
-    const cwd = process.cwd();
+    const controllerDir = path.resolve(process.cwd(), dir);
     const { found } = new Glob('**/*.js', {
       sync: true,
-      cwd: path.resolve(cwd, dir),
+      cwd: controllerDir,
       nodir: true,
       realpath: true
     });
     for (const file of found) {
       const imported = await import(file);
       const controllerClass: typeof ControllerBase = imported[path.basename(file, '.js')];
-      const method = file.replace(cwd, '').substr(1).replace(/\.js$/, '').replace(/[\\/]/, '.');
+      const method = file.replace(controllerDir, '').substr(1).replace(/\.js$/, '').replace(/[\\/]/, '.');
       this.controllerMap[method] = controllerClass;
       this.schemaMap[method] = controllerClass.paramsSchema();
       this.handler.setMethodHandler(method, async (body) => {

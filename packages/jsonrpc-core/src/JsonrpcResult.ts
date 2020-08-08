@@ -4,6 +4,6 @@ export class JsonrpcResult {
   }
 
   static error(id, error) {
-    return { jsonrpc: '2.0', id, error: error.toJSON() };
+    return { jsonrpc: '2.0', id: id === undefined ? null : id, error: error.toJSON() };
   }
 };

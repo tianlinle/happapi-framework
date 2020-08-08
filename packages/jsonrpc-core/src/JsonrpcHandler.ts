@@ -1,5 +1,5 @@
 import { JsonrpcResult } from './JsonrpcResult';
-import { JsonrpcError, InvalidRequest, MethodNotFound, InternalError, ParseError } from './JsonrpcError';
+import { JsonrpcError } from './JsonrpcError';
 
 export type ISuccessResponseObject = { jsonrpc: '2.0', id: string | number | null, result?: any };
 export type IErrorResponseObject = { jsonrpc: '2.0', id: string | number | null, error?: any };
@@ -26,7 +26,7 @@ export class JsonrpcHandler {
       try {
         body = JSON.parse(body);
       } catch (error) {
-        return JsonrpcResult.error(null, new ParseError());
+        return JsonrpcResult.error(null, new JsonrpcError.ParseError());
       }
     }
     let bodyIsArray = true;
@@ -40,10 +40,10 @@ export class JsonrpcHandler {
         if (Object.prototype.toString.call(item) != '[object Object]'
           || item.jsonrpc != '2.0'
           || Object.prototype.toString.call(item.method) != '[object String]') {
-          throw new InvalidRequest();
+          throw new JsonrpcError.InvalidRequest();
         }
         if (!this.methods[item.method]) {
-          throw new MethodNotFound();
+          throw new JsonrpcError.MethodNotFound();
         }
         let description = this.methods[item.method];
         let itemResult = await description.handler.call(description.context, item);
@@ -51,11 +51,13 @@ export class JsonrpcHandler {
           resultList.push(JsonrpcResult.success(item.id, itemResult));
         }
       } catch (error) {
-        if (item.id !== undefined) {
+        if (error instanceof JsonrpcError.InvalidRequest) {
+          resultList.push(JsonrpcResult.error(item.id, error))
+        } else if (item.id !== undefined) {
           if (error instanceof JsonrpcError) {
             resultList.push(JsonrpcResult.error(item.id, error));
           } else {
-            resultList.push(JsonrpcResult.error(item.id, new InternalError(error)));
+            resultList.push(JsonrpcResult.error(item.id, new JsonrpcError.InternalError(error)));
           }
         }
       }

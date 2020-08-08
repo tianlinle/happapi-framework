@@ -34,9 +34,9 @@ export class Logger {
     error: 50,
     final: 100
   }
-  asyncIdMap: Map<number, any>
-  hook: AsyncHooks.AsyncHook
-  level: number
+  protected asyncIdMap: Map<number, any>
+  protected hook: AsyncHooks.AsyncHook
+  protected level: number
   writer: (object: Object) => any
 
   constructor(options?: ConstructorOptions) {

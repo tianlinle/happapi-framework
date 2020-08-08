@@ -1,14 +1,15 @@
 import * as Ajv from 'ajv';
-import { InvalidParams, IRequestObject } from '@happapi/jsonrpc-core';
-import ajv = require('ajv');
+import { IRequestObject, JsonrpcError } from '@happapi/jsonrpc-core';
 
 export class ControllerBase {
   body: IRequestObject
+  params: any
 
   static ajv = new Ajv()
 
   constructor(body: IRequestObject) {
     this.body = body;
+    this.params = body.params;
   }
 
   main() { }
@@ -21,7 +22,7 @@ export class ControllerBase {
     const { params } = this.body;
     const constructor = this.constructor as typeof ControllerBase;
     if (!constructor.ajv.validate(constructor.paramsSchema(), params)) {
-      throw new InvalidParams({
+      throw new JsonrpcError.InvalidParams({
         errorText: constructor.ajv.errorsText(undefined, {
           dataVar: 'params'
         })
