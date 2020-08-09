@@ -18,7 +18,8 @@
   },
   "scripts": {
     "tsc": "tsc",
-    "start-example": "node ./dist/example/test.js"
+    "start-example": "node ./dist/example/test.js",
+    "prepublish": "tsc"
   },
   "publishConfig": {
     "access": "public"

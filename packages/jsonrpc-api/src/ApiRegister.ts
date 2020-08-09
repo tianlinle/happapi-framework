@@ -2,6 +2,8 @@ import { Glob } from 'glob';
 import * as path from 'path';
 import { JsonrpcHandler } from '@happapi/jsonrpc-core';
 import { ControllerBase } from './ControllerBase';
+import * as getRawBody from 'raw-body';
+import * as contentType from 'content-type';
 
 export class ApiRegister {
   handler = new JsonrpcHandler()
@@ -29,8 +31,17 @@ export class ApiRegister {
     }
   }
 
-  async middleware(ctx, next) {
-    ctx.body = this.handler.handle(ctx.request.body);
-    next();
+  apiMiddleware(options?: { bodyLimit: string }) {
+    return async (ctx, next) => {
+      options = Object.assign({ bodyLimit: '10kb' }, options);
+      const body = await getRawBody(ctx.req, {
+        length: ctx.req.headers['content-length'],
+        limit: options.bodyLimit || '10kb',
+        encoding: contentType.parse(ctx.req).parameters.charset || 'utf8'
+      });
+      ctx.set('Content-Type', 'application/json');
+      ctx.body = this.handler.handle(body);
+      next();
+    }
   }
 }
