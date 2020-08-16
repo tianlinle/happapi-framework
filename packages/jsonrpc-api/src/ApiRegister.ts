@@ -1,13 +1,13 @@
 import { Glob } from 'glob';
 import * as path from 'path';
 import { JsonrpcHandler } from '@happapi/jsonrpc-core';
-import { ControllerBase } from './ControllerBase';
+import { Controller } from './Controller';
 import * as getRawBody from 'raw-body';
 import * as contentType from 'content-type';
 
 export class ApiRegister {
   handler = new JsonrpcHandler()
-  controllerMap: { [method: string]: typeof ControllerBase } = {}
+  controllerMap: { [method: string]: typeof Controller } = {}
   schemaMap: { [method: string]: any } = {}
 
   async registerDir(dir: string) {
@@ -20,7 +20,7 @@ export class ApiRegister {
     });
     for (const file of found) {
       const imported = await import(file);
-      const controllerClass: typeof ControllerBase = imported[path.basename(file, '.js')];
+      const controllerClass: typeof Controller = imported[path.basename(file, '.js')];
       const method = file.replace(controllerDir, '').substr(1).replace(/\.js$/, '').replace(/[\\/]/, '.');
       this.controllerMap[method] = controllerClass;
       this.schemaMap[method] = controllerClass.paramsSchema();
@@ -40,7 +40,7 @@ export class ApiRegister {
         encoding: contentType.parse(ctx.req).parameters.charset || 'utf8'
       });
       ctx.set('Content-Type', 'application/json');
-      ctx.body = this.handler.handle(body);
+      ctx.body = await this.handler.handle(body);
       next();
     }
   }

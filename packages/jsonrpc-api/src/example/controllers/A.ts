@@ -1,6 +1,6 @@
-import { ControllerBase } from '../../ControllerBase';
+import { Controller } from '../../Controller';
 
-export class A extends ControllerBase {
+export class A extends Controller {
   params: { id: string }
 
   static paramsSchema() {

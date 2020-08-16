@@ -1,7 +1,7 @@
 import * as Ajv from 'ajv';
 import { IRequestObject, JsonrpcError } from '@happapi/jsonrpc-core';
 
-export class ControllerBase {
+export class Controller {
   body: IRequestObject
   params: any
 
@@ -20,7 +20,7 @@ export class ControllerBase {
 
   async run() {
     const { params } = this.body;
-    const constructor = this.constructor as typeof ControllerBase;
+    const constructor = this.constructor as typeof Controller;
     if (!constructor.ajv.validate(constructor.paramsSchema(), params)) {
       throw new JsonrpcError.InvalidParams({
         errorText: constructor.ajv.errorsText(undefined, {
