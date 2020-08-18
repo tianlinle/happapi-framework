@@ -21,7 +21,7 @@ export class JsonrpcHandler {
     };
   }
 
-  async handle(body: IRequestObject | IRequestObject[] | string) {
+  async handle(body: IRequestObject | IRequestObject[] | string, ...customData: any[]) {
     if (typeof body === 'string') {
       try {
         body = JSON.parse(body);
@@ -46,7 +46,7 @@ export class JsonrpcHandler {
           throw new JsonrpcError.MethodNotFound();
         }
         let description = this.methods[item.method];
-        let itemResult = await description.handler.call(description.context, item);
+        let itemResult = await description.handler.call(description.context, item, ...customData);
         if (item.id != undefined) {
           resultList.push(JsonrpcResult.success(item.id, itemResult));
         }
