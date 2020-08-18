@@ -1,6 +1,6 @@
 {
   "name": "@happapi/jsonrpc-api",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A simple Json-RPC API framework base on koa.",
   "bin": {
     "start-happapi-jsonrpc-server": "./dist/bin/startServer.js"
