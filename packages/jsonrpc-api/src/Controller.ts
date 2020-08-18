@@ -28,7 +28,7 @@ export class Controller {
         })
       });
     }
-    const result = await this.main();
+    const result = (await this.main()) as any;
     return result;
   }
 }
