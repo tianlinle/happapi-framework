@@ -24,11 +24,15 @@ export class ApiRegister {
       const method = file.replace(controllerDir, '').substr(1).replace(/\.js$/, '').replace(/[\\/]/g, '.');
       this.controllerMap[method] = controllerClass;
       this.schemaMap[method] = controllerClass.paramsSchema();
-      this.handler.setMethodHandler(method, async (body) => {
-        const controller = new controllerClass(body);
+      this.handler.setMethodHandler(method, async (body, ...customData: any[]) => {
+        const controller = new controllerClass(body, ...customData);
         return await controller.run();
       });
     }
+  }
+
+  handle(body, ...customData: any[]) {
+    return this.handler.handle(body, ...customData);
   }
 
   apiMiddleware(options?: { bodyLimit: string }) {

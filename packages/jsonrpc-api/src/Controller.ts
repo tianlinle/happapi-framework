@@ -7,7 +7,7 @@ export class Controller {
 
   static ajv = new Ajv()
 
-  constructor(body: IRequestObject) {
+  constructor(body: IRequestObject, ...customData: any[]) {
     this.body = body;
     this.params = body.params;
   }
