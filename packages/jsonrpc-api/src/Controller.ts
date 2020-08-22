@@ -10,6 +10,9 @@ export class Controller {
   constructor(body: IRequestObject, ...customData: any[]) {
     this.body = body;
     this.params = body.params;
+    if (this.params === undefined) {
+      this.params = body.params = {};
+    }
   }
 
   main() { }
@@ -19,9 +22,8 @@ export class Controller {
   }
 
   async run() {
-    const { params } = this.body;
     const constructor = this.constructor as typeof Controller;
-    if (!constructor.ajv.validate(constructor.paramsSchema(), params)) {
+    if (!constructor.ajv.validate(constructor.paramsSchema(), this.params)) {
       throw new JsonrpcError.InvalidParams({
         errorText: constructor.ajv.errorsText(undefined, {
           dataVar: 'params'
